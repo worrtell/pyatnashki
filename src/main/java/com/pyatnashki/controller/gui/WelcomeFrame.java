@@ -1,4 +1,4 @@
-package gui;
+package com.pyatnashki.controller.gui;
 
 import javax.swing.*;
 
