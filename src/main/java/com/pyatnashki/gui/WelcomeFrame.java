@@ -36,6 +36,7 @@ package com.pyatnashki.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class WelcomeFrame extends JFrame {
     private final JTextField tfUserName;
@@ -71,6 +72,12 @@ public class WelcomeFrame extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
 
         setVisible(true);
+
+        //
+        Arrays.stream(panel.getComponents()).forEach(
+                a -> System.out.println(a.getName())
+        );
+
     }
 
     private void showWelcomeMessage() {
@@ -87,3 +94,5 @@ public class WelcomeFrame extends JFrame {
         }
     }
 }
+// enable second half
+// give names
