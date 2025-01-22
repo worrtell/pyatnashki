@@ -1,4 +1,4 @@
-package com.pyatnashki.gui;
+package com.pyatnashki.gui.start;
 
 import javax.swing.*;
 import java.awt.*;

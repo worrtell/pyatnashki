@@ -32,7 +32,9 @@
 //        WelcomeFrame welcomeFrame = new WelcomeFrame();
 //    }
 //}
-package com.pyatnashki.gui;
+package com.pyatnashki.gui.start;
+
+import com.pyatnashki.data.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,7 +47,7 @@ public class WelcomeFrame extends JFrame {
     public WelcomeFrame() {
         super("Welcome!");
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         setSize(400, 200);
         setLocationRelativeTo(null);
@@ -90,7 +92,7 @@ public class WelcomeFrame extends JFrame {
             // send username to server
             setVisible(false);
             System.out.println(userName);
-            JFrame waitFrame = new WaitFrame();
+            WaitFrame waitFrame = new WaitFrame(new User(userName));
         }
     }
 }

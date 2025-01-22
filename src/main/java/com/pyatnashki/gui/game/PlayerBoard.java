@@ -12,5 +12,4 @@ public class PlayerBoard extends JLayeredPane {
         gameBoard.setOpaque(true);
         add(gameBoard,0, 0);
     }
-
 }

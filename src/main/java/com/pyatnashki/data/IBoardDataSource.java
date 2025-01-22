@@ -5,5 +5,5 @@ import java.util.List;
 // board ds - с данными конкретного пользователя
 
 public interface IBoardDataSource {
-    List<Integer> getSchema(String sessionId);
+    List<String> getSchema(String sessionId);
 }

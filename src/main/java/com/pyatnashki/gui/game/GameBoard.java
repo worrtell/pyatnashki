@@ -25,7 +25,6 @@ public class GameBoard extends JPanel implements KeyListener {
         setBoard();
         setFocusable(true);
         requestFocusInWindow();
-
     }
 
     private void setBoard() {
@@ -34,6 +33,8 @@ public class GameBoard extends JPanel implements KeyListener {
         for (String square : order) {
             buttonPanel.add(new JButton(square));
         }
+        // i guess here we need to make http post
+        System.out.println(order);
         buttonPanel.setPreferredSize(new Dimension(300, 300));
         this.add(buttonPanel);
         this.revalidate();
@@ -59,6 +60,7 @@ public class GameBoard extends JPanel implements KeyListener {
                 Collections.swap(order, order.indexOf("0"), order.indexOf("0") - 3);
             }
             this.remove(buttonPanel);
+            System.out.println("pressed");
             setBoard();
         }
     }
