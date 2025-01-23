@@ -2,37 +2,38 @@ package com.pyatnashki.gui.game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Map;
 
-import static java.util.Arrays.asList;
-
-public class GameBoard extends JPanel implements KeyListener {
-    private ArrayList<String> order;
+public class GameBoard extends JPanel  {
+    private final ArrayList<String> order;
     private JPanel buttonPanel;
-    private ArrayList<Integer> goLeft = new ArrayList<>(asList(0, 1, 3, 4, 6, 7));
-    private ArrayList<Integer> goRight = new ArrayList<>(asList(1, 2, 4, 5, 7, 8));
-    private ArrayList<Integer> goUp = new ArrayList<>(asList(0, 1, 2, 3, 4, 5));
-    private ArrayList<Integer> goDown = new ArrayList<>(asList(3, 4, 5, 6, 7, 8));
-    private ArrayList<Integer> moveKeys = new ArrayList<>(asList(37, 38, 39, 40));
+
+    Map<String, String> board = Map.of(
+            "0", "D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\zero.png",
+            "1", "D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\one.png",
+            "2","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\two.png",
+            "3","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\three.png",
+            "4","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\four.png",
+            "5","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\five.png",
+            "6","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\six.png",
+            "7","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\seven.png",
+            "8","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\eight.png"
+    );
 
     GameBoard(ArrayList<String> order) {
         super();
         this.order = order;
-        addKeyListener(this);
+
         setBoard();
-        setFocusable(true);
-        requestFocusInWindow();
 
     }
 
-    private void setBoard() {
+    public void setBoard() {
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(3, 3));
         for (String square : order) {
-            buttonPanel.add(new JButton(square));
+            buttonPanel.add(new Square(board.get(square), square));
         }
         buttonPanel.setPreferredSize(new Dimension(300, 300));
         this.add(buttonPanel);
@@ -40,31 +41,11 @@ public class GameBoard extends JPanel implements KeyListener {
         this.repaint();
     }
 
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
+    public JPanel getButtonPanel() {
+        return buttonPanel;
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (moveKeys.contains(e.getKeyCode())) {
-            if (e.getKeyCode() == 37 && goLeft.contains(order.indexOf("0"))) {
-                Collections.swap(order, order.indexOf("0"), order.indexOf("0") + 1);
-            } else if (e.getKeyCode() == 39 && goRight.contains(order.indexOf("0"))) {
-                Collections.swap(order, order.indexOf("0"), order.indexOf("0") - 1);
-            } else if (e.getKeyCode() == 38 && goUp.contains(order.indexOf("0"))) {
-                Collections.swap(order, order.indexOf("0"), order.indexOf("0") + 3);
-            } else if (e.getKeyCode() == 40 && goDown.contains(order.indexOf("0"))) {
-                Collections.swap(order, order.indexOf("0"), order.indexOf("0") - 3);
-            }
-            this.remove(buttonPanel);
-            setBoard();
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
+    public ArrayList<String> getOrder() {
+        return order;
     }
 }
