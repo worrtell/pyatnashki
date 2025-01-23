@@ -102,9 +102,9 @@ public class WelcomeFrame extends JFrame {
             if (users.size() % 2 == 0) {
                 //WaitFrame waitFrame = new WaitFrame();
                 Board board1 = new Board(users);
-                board1.resetGameBoard2();
+                board1.resetGameBoardTwo();
                 Board board2 = new Board(users);
-                board2.resetGameBoard2();
+                board2.resetGameBoardTwo();
             }
         }
     }

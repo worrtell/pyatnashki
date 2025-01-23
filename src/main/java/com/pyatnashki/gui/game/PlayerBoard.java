@@ -1,6 +1,9 @@
 package com.pyatnashki.gui.game;
 
 
+import com.pyatnashki.data.BoardDataSource;
+import com.pyatnashki.data.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -17,6 +20,9 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     private final GameBoard gameBoard;
     private final String movesMade = "moves made: %s";
     private int movesCounter;
+    private static User user;
+
+    BoardDataSource dataSource;
     private final ArrayList<Integer> goLeft = new ArrayList<>(asList(0, 1, 3, 4, 6, 7));
     private final ArrayList<Integer> goRight = new ArrayList<>(asList(1, 2, 4, 5, 7, 8));
     private final ArrayList<Integer> goUp = new ArrayList<>(asList(0, 1, 2, 3, 4, 5));
@@ -24,6 +30,10 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     private final ArrayList<Integer> moveKeys = new ArrayList<>(asList(37, 38, 39, 40));
 
     PlayerBoard(GameBoard gameBoard, int x, int y) {
+        super();
+        this.user = user;
+        dataSource = new BoardDataSource();
+        dataSource.onMove(user);
         movesCounter = 0;
         this.gameBoard = gameBoard;
         setBounds(x, y, 300, 600);
@@ -80,4 +90,33 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
+    public void reset() {
+        Thread thread = new Thread()
+        {
+            public void run()
+            {
+                while (true){
+                    // and here we get new KeyCode
+                    System.out.println("try reset board");
+                    int gotKeyPressed = dataSource.getPairMove(user);
+                    if (gotKeyPressed != 0) {
+                        System.out.println("got move");
+                        tryMakingMove(dataSource.getPairMove(user));
+                    }
+                    else {
+                        System.out.println("no move");
+                    }
+                    try
+                    {
+                        Thread.sleep(2000); // 1 second
+                    } catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        thread.start();
+    }
+
 }

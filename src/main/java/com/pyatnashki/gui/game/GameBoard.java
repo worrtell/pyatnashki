@@ -1,5 +1,8 @@
 package com.pyatnashki.gui.game;
 
+import com.pyatnashki.data.BoardDataSource;
+import com.pyatnashki.data.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,12 +24,10 @@ public class GameBoard extends JPanel  {
             "8","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\eight.png"
     );
 
-    GameBoard(ArrayList<String> order) {
+    GameBoard(ArrayList<String> order,User user) {
         super();
         this.order = order;
-
         setBoard();
-
     }
 
     public void setBoard() {
@@ -48,4 +49,6 @@ public class GameBoard extends JPanel  {
     public ArrayList<String> getOrder() {
         return order;
     }
+
+
 }
