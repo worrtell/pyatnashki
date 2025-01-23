@@ -34,19 +34,24 @@
 //}
 package com.pyatnashki.gui.start;
 
+import com.pyatnashki.data.BoardDataSource;
 import com.pyatnashki.data.User;
+import com.pyatnashki.gui.game.Board;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class WelcomeFrame extends JFrame {
     private final JTextField tfUserName;
     private final JButton btnSubmit;
+    LinkedList<User> users;
+    BoardDataSource dataSource = new BoardDataSource();
 
-    public WelcomeFrame() {
+    public WelcomeFrame(LinkedList<User> users) {
         super("Welcome!");
-
+        this.users = users;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         setSize(400, 200);
@@ -91,8 +96,16 @@ public class WelcomeFrame extends JFrame {
             // sth.setName(userName)
             // send username to server
             setVisible(false);
-            System.out.println(userName);
-            WaitFrame waitFrame = new WaitFrame(new User(userName));
+            //System.out.println(userName);
+            users.add(new User(userName));
+
+            if (users.size() % 2 == 0) {
+                //WaitFrame waitFrame = new WaitFrame();
+                Board board1 = new Board(users);
+                board1.resetGameBoard2();
+                Board board2 = new Board(users);
+                board2.resetGameBoard2();
+            }
         }
     }
 }

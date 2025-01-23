@@ -1,13 +1,19 @@
 package com.pyatnashki.gui.start;
 
+import com.pyatnashki.data.User;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
 public class AddFrame extends JFrame {
     private final JButton btnAdd;
+    private LinkedList<User> users;
 
     public AddFrame() {
         super("Start");
+
+        users = new LinkedList<>();
 
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
@@ -26,7 +32,7 @@ public class AddFrame extends JFrame {
     }
 
     private void addPlayer() {
-        WelcomeFrame welcomeFrame = new WelcomeFrame();
+        WelcomeFrame welcomeFrame = new WelcomeFrame(users);
     }
 
     public static void main(String[] args) {

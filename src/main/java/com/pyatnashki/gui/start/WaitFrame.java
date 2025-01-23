@@ -40,18 +40,18 @@ public class WaitFrame extends JFrame {
         System.out.println("new wait frame");
 
         btn = new JButton("test");
-        btn.addActionListener(it -> t());
+        //btn.addActionListener(it -> t());
 
         add(btn);
         setVisible(true);
         System.out.println("user " + user.toString());
     }
 
-    public static void t() {
-        try {
-            ds.onMove(user);
-        } catch (URISyntaxException | IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public static void t() {
+//        try {
+//            ds.onMove(user);
+//        } catch (URISyntaxException | IOException | InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }
