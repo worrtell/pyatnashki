@@ -20,7 +20,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     private final GameBoard gameBoard;
     private final String movesMade = "moves made: %s";
     private int movesCounter;
-    private static User user;
+    private User user;
 
     BoardDataSource dataSource;
     private final ArrayList<Integer> goLeft = new ArrayList<>(asList(0, 1, 3, 4, 6, 7));
@@ -29,7 +29,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     private final ArrayList<Integer> goDown = new ArrayList<>(asList(3, 4, 5, 6, 7, 8));
     private final ArrayList<Integer> moveKeys = new ArrayList<>(asList(37, 38, 39, 40));
 
-    PlayerBoard(GameBoard gameBoard, int x, int y) {
+    PlayerBoard(GameBoard gameBoard, User user, int x, int y) {
         super();
         this.user = user;
         dataSource = new BoardDataSource();
@@ -83,6 +83,8 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        user.setKeycode(e.getKeyCode());
+        dataSource.onMove(user);
         tryMakingMove(e.getKeyCode());
     }
 
@@ -101,7 +103,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
                     int gotKeyPressed = dataSource.getPairMove(user);
                     if (gotKeyPressed != 0) {
                         System.out.println("got move");
-                        tryMakingMove(dataSource.getPairMove(user));
+                        tryMakingMove(gotKeyPressed);
                     }
                     else {
                         System.out.println("no move");

@@ -23,10 +23,10 @@ public class Board extends JFrame {
     /* key codes:
     37, 38, 39, 40
      */
-    public Board(LinkedList<User> users) {
+    public Board(User user) {
         super();
-        playerBoardOne = new PlayerBoard(new GameBoard(getStartPosition(), users.get(0)), 0, 0);
-        playerBoardTwo = new PlayerBoard(new GameBoard(getStartPosition(), users.get(1)), 330, 0);
+        playerBoardOne = new PlayerBoard(new GameBoard(getStartPosition()), user, 0, 0);
+        playerBoardTwo = new PlayerBoard(new GameBoard(getStartPosition()), user, 330, 0);
         add(playerBoardOne, BorderLayout.WEST);
         add(playerBoardTwo, BorderLayout.EAST);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

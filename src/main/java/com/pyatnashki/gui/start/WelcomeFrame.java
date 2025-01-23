@@ -47,7 +47,6 @@ public class WelcomeFrame extends JFrame {
     private final JTextField tfUserName;
     private final JButton btnSubmit;
     LinkedList<User> users;
-    BoardDataSource dataSource = new BoardDataSource();
 
     public WelcomeFrame(LinkedList<User> users) {
         super("Welcome!");
@@ -101,10 +100,11 @@ public class WelcomeFrame extends JFrame {
 
             if (users.size() % 2 == 0) {
                 //WaitFrame waitFrame = new WaitFrame();
-                Board board1 = new Board(users);
+                Board board1 = new Board(users.get(0));
                 board1.resetGameBoardTwo();
-                Board board2 = new Board(users);
+                Board board2 = new Board(users.get(1));
                 board2.resetGameBoardTwo();
+                users = new LinkedList<>();
             }
         }
     }

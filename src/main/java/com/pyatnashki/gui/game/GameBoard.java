@@ -13,18 +13,18 @@ public class GameBoard extends JPanel  {
     private JPanel buttonPanel;
 
     Map<String, String> board = Map.of(
-            "0", "D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\zero.png",
-            "1", "D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\one.png",
-            "2","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\two.png",
-            "3","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\three.png",
-            "4","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\four.png",
-            "5","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\five.png",
-            "6","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\six.png",
-            "7","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\seven.png",
-            "8","D:\\IdeaProjects\\pyatnashki\\src\\main\\resources\\images\\eight.png"
+            "0", "C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\zero.png",
+            "1", "C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\one.png",
+            "2","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\two.png",
+            "3","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\three.png",
+            "4","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\four.png",
+            "5","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\five.png",
+            "6","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\six.png",
+            "7","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\seven.png",
+            "8","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\eight.png"
     );
 
-    GameBoard(ArrayList<String> order,User user) {
+    GameBoard(ArrayList<String> order) {
         super();
         this.order = order;
         setBoard();

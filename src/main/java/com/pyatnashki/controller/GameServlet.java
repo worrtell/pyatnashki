@@ -21,13 +21,11 @@ import java.util.Map;
 
 @WebServlet("/game")
 public class GameServlet extends HttpServlet {
-    //Map<String, User> users;
     UserService userService;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         ServletContext servletContext = config.getServletContext();
-
-        //users = (Map<String, User>) servletContext.getAttribute("users");
         userService = (UserService) servletContext.getAttribute("userService");
 
         super.init(config);
@@ -44,8 +42,6 @@ public class GameServlet extends HttpServlet {
         System.out.println("session " + req.getSession().getId());
 
         String body = getBody(req);
-
-        System.out.println("body " + body);
 
         JsonNode rootNode = mapper.readTree(body);
 
