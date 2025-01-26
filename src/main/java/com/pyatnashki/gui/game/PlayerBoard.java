@@ -1,8 +1,8 @@
 package com.pyatnashki.gui.game;
 
 
-import com.pyatnashki.data.BoardDataSource;
-import com.pyatnashki.data.User;
+import com.pyatnashki.model.User;
+import com.pyatnashki.service.UserRequestService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +23,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     private User user;
     private Stopwatch stopwatch;
 
-    BoardDataSource dataSource;
+    private UserRequestService requestService;
     private final ArrayList<Integer> goLeft = new ArrayList<>(asList(0, 1, 3, 4, 6, 7));
     private final ArrayList<Integer> goRight = new ArrayList<>(asList(1, 2, 4, 5, 7, 8));
     private final ArrayList<Integer> goUp = new ArrayList<>(asList(0, 1, 2, 3, 4, 5));
@@ -38,8 +38,8 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
         requestFocusInWindow();
 
         this.user = user;
-        this.dataSource = new BoardDataSource();
-        this.dataSource.onMove(user);
+        this.requestService = new UserRequestService();
+        this.requestService.onMove(user);
         this.movesCounter = 0;
 
         this.gameBoard = gameBoard;
@@ -94,7 +94,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         user.setKeycode(e.getKeyCode());
-        dataSource.onMove(user);
+        requestService.onMove(user);
         tryMakingMove(e.getKeyCode());
     }
 
@@ -109,7 +109,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
                 while (true) {
                     // and here we get new KeyCode
                     System.out.println("try reset board");
-                    int gotKeyPressed = dataSource.getPairMove(user);
+                    int gotKeyPressed = requestService.getPairMove(user);
                     if (gotKeyPressed != 0) {
                         System.out.println("got move");
                         tryMakingMove(gotKeyPressed);
