@@ -61,10 +61,12 @@ public class GameServlet extends HttpServlet {
             System.out.println("ans " + ans);
             mapper.writeValue(response.getWriter(), ans);
         }
-
         else if (type.equals("getPairOrder")) {
             System.out.println("getPairOrder request");
             mapper.writeValue(response.getWriter(), userService.getPairOrder(u));
+        }
+        else if (type.equals("getPairFlag")) {
+            mapper.writeValue(response.getWriter(), userService.getPairFlag(u));
         }
     }
 

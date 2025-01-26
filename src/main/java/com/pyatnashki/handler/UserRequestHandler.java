@@ -51,6 +51,19 @@ public class UserRequestHandler {
         return Integer.parseInt(strResp);
     }
 
+    public boolean getPairFlag(User u) {
+        HttpResponse response = sendUser(u, "getPairFlag");
+        String strResp = (String) response.body();
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            boolean order = mapper.readValue(strResp, Boolean.class);
+            System.out.println(order);
+            return order;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static HttpRequest.BodyPublisher ofForm(User user, String type) {
         ObjectMapper mapper = new ObjectMapper();
         try {

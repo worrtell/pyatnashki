@@ -28,4 +28,8 @@ public class UserService {
     public ArrayList<String> getPairOrder(User user) {
         return repository.getPairOrder(user);
     }
+
+    public boolean getPairFlag(User user) {
+        return repository.getPairFlag(user);
+    }
 }

@@ -25,6 +25,7 @@ public class UserRepository {
         else {
             users.get(user.getSecretKey()).setKeycode(user.getKeycode());
             users.get(user.getSecretKey()).setOrder(user.getOrder());
+            users.get(user.getSecretKey()).setFlag(user.getFlag());
         }
     }
 
@@ -46,6 +47,15 @@ public class UserRepository {
         }
         System.out.println("no pair");
         return new ArrayList<>();
+    }
+
+    public boolean getPairFlag(User user) {
+        String pairSecretKey = getPairSecretKey(user);
+        if (!pairSecretKey.isEmpty()) {
+            System.out.println("got pair");
+            return users.get(pairSecretKey).getFlag();
+        }
+        return false;
     }
 
     private void findFree(User young) {

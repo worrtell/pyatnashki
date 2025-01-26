@@ -23,4 +23,8 @@ public class UserRequestService {
     public ArrayList<String> getPairOrder(User u) {
         return requestHandler.getPairOrder(u);
     }
+
+    public boolean getPairFlag(User u) {
+        return requestHandler.getPairFlag(u);
+    }
 }

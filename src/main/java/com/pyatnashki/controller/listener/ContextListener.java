@@ -19,12 +19,10 @@ public class ContextListener implements ServletContextListener {
         Map<String, User> users = new HashMap<>();
         ArrayList<User> pairs = new ArrayList<>();
 
-        //UserRepository userRepository = new UserRepository();
         UserService userService = new UserService();
 
         servletContext.setAttribute("users", users);
         servletContext.setAttribute("pairs", pairs);
-        //servletContext.setAttribute("userService", userRepository);
         servletContext.setAttribute("userService", userService);
     }
     public void contextDestroyed(ServletContextEvent event) {
