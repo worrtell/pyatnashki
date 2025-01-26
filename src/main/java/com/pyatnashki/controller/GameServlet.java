@@ -57,14 +57,15 @@ public class GameServlet extends HttpServlet {
         }
         else if (type.equals("getPairCode")) {
             System.out.println("getPairCode request");
-            //System.out.println("service get key " + userService.getPairKeyCode(u));
             ans = String.valueOf(userService.getPairKeyCode(u));
             System.out.println("ans " + ans);
-            //ans = "38";
+            mapper.writeValue(response.getWriter(), ans);
         }
-        System.out.println("list of users: " + userService.getUsers());
 
-        mapper.writeValue(response.getWriter(), ans);
+        else if (type.equals("getPairOrder")) {
+            System.out.println("getPairOrder request");
+            mapper.writeValue(response.getWriter(), userService.getPairOrder(u));
+        }
     }
 
     @Override

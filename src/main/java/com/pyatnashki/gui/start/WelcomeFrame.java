@@ -99,11 +99,27 @@ public class WelcomeFrame extends JFrame {
 
             if (users.size() % 2 == 0) {
                 //WaitFrame waitFrame = new WaitFrame();
-                Board board1 = new Board(users.get(0));
-                board1.resetGameBoardTwo();
-                Board board2 = new Board(users.get(1));
-                board2.resetGameBoardTwo();
-                users = new LinkedList<>();
+//                Board board1 = new Board(users.get(0));
+//                board1.resetGameBoardTwo();
+//                Board board2 = new Board(users.get(1));
+//                board2.resetGameBoardTwo();
+//                users = new LinkedList<>();
+
+                Thread t1 = new Thread(new Runnable() {
+                    public void run() {
+                        Board board1 = new Board(users.get(0));
+                        board1.resetGameBoardTwo();
+                    }
+                });
+                Thread t2 = new Thread(new Runnable() {
+                    public void run() {
+                        Board board2 = new Board(users.get(1));
+                        board2.resetGameBoardTwo();
+                    }
+                });
+                t1.start();
+                t2.start();
+                //users = new LinkedList<>();
             }
         }
     }

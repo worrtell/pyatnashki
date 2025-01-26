@@ -1,6 +1,7 @@
 package com.pyatnashki.gui.game;
 
 import com.pyatnashki.model.User;
+import com.pyatnashki.service.UserRequestService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,15 +19,19 @@ public class Board extends JFrame {
     /* this is board of his opponent
     so: we need to get the start position from server
     */
-
     /* key codes:
     37, 38, 39, 40
      */
+
+    UserRequestService requestService = new UserRequestService();
+
     public Board(User user) {
         super();
-        playerBoardOne = new PlayerBoard(new GameBoard(getStartPosition()), user, 0, 0);
-        // here for second user we need UserService.getPairOrder(user)
-        playerBoardTwo = new PlayerBoard(new GameBoard(getStartPosition()), user, 330, 0);
+        ArrayList<String> order = getStartPosition();
+        playerBoardOne = new PlayerBoard(new GameBoard(order), user, 0, 0);
+        user.setOrder(order);
+        requestService.onMove(user);
+        playerBoardTwo = new PlayerBoard(new GameBoard(requestService.getPairOrder(user)), user, 330, 0);
         add(playerBoardOne, BorderLayout.WEST);
         add(playerBoardTwo, BorderLayout.EAST);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

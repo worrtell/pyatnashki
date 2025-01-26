@@ -24,6 +24,7 @@ public class UserRepository {
         }
         else {
             users.get(user.getSecretKey()).setKeycode(user.getKeycode());
+            users.get(user.getSecretKey()).setOrder(user.getOrder());
         }
     }
 

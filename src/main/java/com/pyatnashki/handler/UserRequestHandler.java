@@ -1,6 +1,7 @@
 package com.pyatnashki.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pyatnashki.model.User;
 
@@ -9,6 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 
 public class UserRequestHandler {
     HttpClient client;
@@ -20,16 +22,26 @@ public class UserRequestHandler {
     }
 
     public void onMove(User u){
-        HttpResponse response = sendUser(u, "write");
-        System.out.println("Body: " + response.body());
+        sendUser(u, "write");
+        //System.out.println("Body: " + response.body());
+    }
+
+    public ArrayList<String> getPairOrder(User u) {
+        HttpResponse response = sendUser(u, "getPairOrder");
+        String strResp = (String) response.body();
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ArrayList<String> order = mapper.readValue(strResp,new TypeReference<ArrayList<String>>(){});
+            System.out.println(order);
+            return order;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int getPairMove(User u) {
         HttpResponse response = sendUser(u, "getPairCode");
-        System.out.println("Body !!!!!!!: " + response.body());
         String strResp = (String) response.body();
-
-        System.out.println("len " + strResp.length());
 
         if (strResp.length() == 2) {
             System.out.println("respB is empty");
@@ -55,7 +67,7 @@ public class UserRequestHandler {
                 .POST(ofForm(u, type))
                 .build();
 
-        System.out.println("Req " + request.toString());
+        System.out.println("Req " + u);
 
         HttpResponse response = null;
         try {

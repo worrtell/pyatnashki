@@ -25,8 +25,13 @@ public class User {
         pairSecretKey = "";
     }
 
+    public User(String secretKey, String name) {
+        this.secretKey = secretKey;
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return "name = " + name + ", keycode = " + keycode + " pair " + pairSecretKey;
+        return "name = " + name + ", keycode = " + keycode + " pair " + pairSecretKey + "\norder = " + order;
     }
 }

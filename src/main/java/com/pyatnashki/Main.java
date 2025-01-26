@@ -1,28 +1,24 @@
 package com.pyatnashki;
 
 import com.pyatnashki.handler.UserRequestHandler;
+import com.pyatnashki.model.User;
+import com.pyatnashki.service.UserRequestService;
+
+import java.util.ArrayList;
+
+import static java.util.Arrays.asList;
 
 public class Main {
     public static void main(String[] args) {
-        UserRequestHandler ds = new UserRequestHandler();
-//        try {
-//            ds.onMove(null);
-//        } catch (URISyntaxException | IOException | InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        UserRequestService requestService = new UserRequestService();
+        User user1 = new User("1", "s3", new ArrayList<>(asList("6", "7", "8", "0", "1", "2", "3", "4", "5")), "s4", 0);
+        User user2 = new User("2", "s4", new ArrayList<>(asList("0", "1", "2", "3", "4", "5", "6", "7", "8")), "s3", 0);
 
-//        UserService userService = new UserService();
-//        userService.add(new User("h"));
-//        System.out.println(userService.getUsers());
-//        userService.add(new User("p"));
-//        System.out.println(userService.getUsers());
-//        userService.add(new User("t"));
-//        System.out.println(userService.getUsers());
-//        userService.add(new User("s"));
-//        System.out.println(userService.getUsers());
+        user1.setOrder(new ArrayList<>(asList("test", "7", "8", "0", "1", "2", "3", "4", "5")));
 
-        String body = "{\"name\":\"s\",\"secretKey\":\"2be3e943-8c71-4034-af8a-cee8f0261c4d\",\"schema\":[],\"pairSecretKey\":null,\"keycode\":0}";
-        String type = "write";
-        System.out.println("{\"user\":" + body + ",\"type\":\"" + type + "\"}");
+        requestService.onMove(user1);
+        requestService.onMove(user2);
+
+        System.out.println("yey " + requestService.getPairOrder(user2));
     }
 }

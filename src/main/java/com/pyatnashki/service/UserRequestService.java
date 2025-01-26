@@ -3,6 +3,8 @@ package com.pyatnashki.service;
 import com.pyatnashki.model.User;
 import com.pyatnashki.handler.UserRequestHandler;
 
+import java.util.ArrayList;
+
 public class UserRequestService {
     UserRequestHandler requestHandler;
 
@@ -16,5 +18,9 @@ public class UserRequestService {
 
     public int getPairMove(User u) {
         return requestHandler.getPairMove(u);
+    }
+
+    public ArrayList<String> getPairOrder(User u) {
+        return requestHandler.getPairOrder(u);
     }
 }
