@@ -1,6 +1,6 @@
 package com.pyatnashki.gui.game;
 
-import com.pyatnashki.data.User;
+import com.pyatnashki.model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +25,7 @@ public class Board extends JFrame {
     public Board(User user) {
         super();
         playerBoardOne = new PlayerBoard(new GameBoard(getStartPosition()), user, 0, 0);
+        // here for second user we need UserService.getPairOrder(user)
         playerBoardTwo = new PlayerBoard(new GameBoard(getStartPosition()), user, 330, 0);
         add(playerBoardOne, BorderLayout.WEST);
         add(playerBoardTwo, BorderLayout.EAST);
@@ -36,6 +37,7 @@ public class Board extends JFrame {
     }
 
     private ArrayList<String> getStartPosition() {
+        // and here we need to put user order
         ArrayList<String> order = new ArrayList<>(asList("0", "1", "2", "3", "4", "5", "6", "7", "8"));
         Collections.shuffle(order);
         return order;

@@ -34,8 +34,7 @@
 //}
 package com.pyatnashki.gui.start;
 
-import com.pyatnashki.data.BoardDataSource;
-import com.pyatnashki.data.User;
+import com.pyatnashki.model.User;
 import com.pyatnashki.gui.game.Board;
 
 import javax.swing.*;
