@@ -1,7 +1,5 @@
 package com.pyatnashki.gui.game;
 
-import com.pyatnashki.data.BoardDataSource;
-import com.pyatnashki.data.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,17 +11,16 @@ public class GameBoard extends JPanel  {
     private JPanel buttonPanel;
 
     Map<String, String> board = Map.of(
-            "0", "C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\zero.png",
-            "1", "C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\one.png",
-            "2","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\two.png",
-            "3","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\three.png",
-            "4","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\four.png",
-            "5","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\five.png",
-            "6","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\six.png",
-            "7","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\seven.png",
-            "8","C:\\Users\\Dell\\Documents\\GitHub\\pyatnashki\\src\\main\\resources\\images\\eight.png"
+            "0", "images\\zero.png",
+            "1", "images\\one.png",
+            "2","images\\two.png",
+            "3","images\\three.png",
+            "4","images\\four.png",
+            "5","images\\five.png",
+            "6","images\\six.png",
+            "7","images\\seven.png",
+            "8","images\\eight.png"
     );
-
     GameBoard(ArrayList<String> order) {
         super();
         this.order = order;
@@ -49,6 +46,5 @@ public class GameBoard extends JPanel  {
     public ArrayList<String> getOrder() {
         return order;
     }
-
 
 }

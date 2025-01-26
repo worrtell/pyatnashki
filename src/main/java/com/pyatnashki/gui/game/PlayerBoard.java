@@ -21,6 +21,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     private final String movesMade = "moves made: %s";
     private int movesCounter;
     private User user;
+    private Stopwatch stopwatch;
 
     BoardDataSource dataSource;
     private final ArrayList<Integer> goLeft = new ArrayList<>(asList(0, 1, 3, 4, 6, 7));
@@ -31,24 +32,33 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
 
     PlayerBoard(GameBoard gameBoard, User user, int x, int y) {
         super();
-        this.user = user;
-        dataSource = new BoardDataSource();
-        dataSource.onMove(user);
-        movesCounter = 0;
-        this.gameBoard = gameBoard;
         setBounds(x, y, 300, 600);
-        this.gameBoard.setBounds(0, 0, 300, 300);
-        this.gameBoard.setOpaque(true);
         addKeyListener(this);
         setFocusable(true);
         requestFocusInWindow();
 
+        this.user = user;
+        this.dataSource = new BoardDataSource();
+        this.dataSource.onMove(user);
+        this.movesCounter = 0;
+
+        this.gameBoard = gameBoard;
+        this.gameBoard.setBounds(0, 0, 300, 300);
+        this.gameBoard.setOpaque(true);
         add(gameBoard, 0, 0);
-        movesMadeLabel = new JLabel(movesMade.formatted(0));
-        movesMadeLabel.setFont(new Font("Courier New", Font.PLAIN, 20));
-        movesMadeLabel.setBounds(x + 50, y + 350, 200, 100);
-        movesMadeLabel.setOpaque(true);
-        add(movesMadeLabel, 0, 1);
+
+        this.movesMadeLabel = new JLabel(movesMade.formatted(0));
+        this.movesMadeLabel.setFont(new Font("Courier New", Font.PLAIN, 20));
+        this.movesMadeLabel.setBounds(30, 330, 200, 100);
+        this.movesMadeLabel.setOpaque(true);
+        this.movesMadeLabel.setVisible(true);
+        add(movesMadeLabel);
+
+        this.stopwatch = new Stopwatch();
+        this.stopwatch.setBounds(30, 430, 300, 100);
+        this.stopwatch.setOpaque(true);
+        this.stopwatch.setVisible(true);
+        add(stopwatch);
 
     }
 
@@ -92,27 +102,23 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
+
     public void reset() {
-        Thread thread = new Thread()
-        {
-            public void run()
-            {
-                while (true){
+        Thread thread = new Thread() {
+            public void run() {
+                while (true) {
                     // and here we get new KeyCode
                     System.out.println("try reset board");
                     int gotKeyPressed = dataSource.getPairMove(user);
                     if (gotKeyPressed != 0) {
                         System.out.println("got move");
                         tryMakingMove(gotKeyPressed);
-                    }
-                    else {
+                    } else {
                         System.out.println("no move");
                     }
-                    try
-                    {
+                    try {
                         Thread.sleep(2000); // 1 second
-                    } catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

@@ -2,6 +2,8 @@ package com.pyatnashki.gui.game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 
 public class Square extends JButton {
@@ -10,9 +12,15 @@ public class Square extends JButton {
 
     public Square(String image, String value) {
         super();
-        if (image != null) {
-            this.icon = new StretchIcon(image);
-            this.setIcon(icon);
+        try {
+            if (image != null) {
+                ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+                InputStream is = classloader.getResourceAsStream(image);
+                this.icon = new StretchIcon(is.readAllBytes());
+                this.setIcon(icon);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         this.value = value;
         removeActionListener(this.actionListener);
