@@ -1,17 +1,10 @@
 package com.pyatnashki;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pyatnashki.data.BoardDataSource;
-import com.pyatnashki.data.User;
-import com.pyatnashki.service.UserService;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
+import com.pyatnashki.handler.UserRequestHandler;
 
 public class Main {
     public static void main(String[] args) {
-        BoardDataSource ds = new BoardDataSource();
+        UserRequestHandler ds = new UserRequestHandler();
 //        try {
 //            ds.onMove(null);
 //        } catch (URISyntaxException | IOException | InterruptedException e) {

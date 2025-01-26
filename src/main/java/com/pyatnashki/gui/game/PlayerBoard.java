@@ -1,8 +1,8 @@
 package com.pyatnashki.gui.game;
 
 
-import com.pyatnashki.data.BoardDataSource;
-import com.pyatnashki.data.User;
+import com.pyatnashki.model.User;
+import com.pyatnashki.service.UserRequestService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +22,8 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     private int movesCounter;
     private User user;
 
-    BoardDataSource dataSource;
+    //UserRequestHandler dataSource;
+    UserRequestService requestService;
     private final ArrayList<Integer> goLeft = new ArrayList<>(asList(0, 1, 3, 4, 6, 7));
     private final ArrayList<Integer> goRight = new ArrayList<>(asList(1, 2, 4, 5, 7, 8));
     private final ArrayList<Integer> goUp = new ArrayList<>(asList(0, 1, 2, 3, 4, 5));
@@ -32,8 +33,10 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     PlayerBoard(GameBoard gameBoard, User user, int x, int y) {
         super();
         this.user = user;
-        dataSource = new BoardDataSource();
-        dataSource.onMove(user);
+        //dataSource = new UserRequestHandler();
+        //dataSource.onMove(user);
+        requestService = new UserRequestService();
+        requestService.onMove(user);
         movesCounter = 0;
         this.gameBoard = gameBoard;
         setBounds(x, y, 300, 600);
@@ -49,7 +52,6 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
         movesMadeLabel.setBounds(x + 50, y + 350, 200, 100);
         movesMadeLabel.setOpaque(true);
         add(movesMadeLabel, 0, 1);
-
     }
 
     public void setMovesMade() {
@@ -84,7 +86,8 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         user.setKeycode(e.getKeyCode());
-        dataSource.onMove(user);
+        //dataSource.onMove(user);
+        requestService.onMove(user);
         tryMakingMove(e.getKeyCode());
     }
 
@@ -100,7 +103,8 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
                 while (true){
                     // and here we get new KeyCode
                     System.out.println("try reset board");
-                    int gotKeyPressed = dataSource.getPairMove(user);
+                    //int gotKeyPressed = dataSource.getPairMove(user);
+                    int gotKeyPressed = requestService.getPairMove(user);
                     if (gotKeyPressed != 0) {
                         System.out.println("got move");
                         tryMakingMove(gotKeyPressed);

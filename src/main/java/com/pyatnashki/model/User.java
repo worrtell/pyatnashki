@@ -1,4 +1,4 @@
-package com.pyatnashki.data;
+package com.pyatnashki.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,22 +14,16 @@ import java.util.UUID;
 public class User {
     String name;
     String secretKey;
-    ArrayList<String> schema;
+    ArrayList<String> order;
     String pairSecretKey;
     int keycode;
 
     public User(String name) {
         this.name = name;
         secretKey = String.valueOf(UUID.randomUUID());
-        //maby create start schema there?
-        schema = new ArrayList<>();
+        order = new ArrayList<>();
         pairSecretKey = "";
     }
-
-//    @Override
-//    public String toString() {
-//        return "name = " + name + ", secretKey = " + secretKey + " ,pair secret key = " + pairSecretKey;
-//    }
 
     @Override
     public String toString() {

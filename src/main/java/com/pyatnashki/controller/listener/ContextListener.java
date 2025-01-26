@@ -1,13 +1,12 @@
 package com.pyatnashki.controller.listener;
 
-import com.pyatnashki.data.User;
+import com.pyatnashki.model.User;
 import com.pyatnashki.service.UserService;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
-import java.io.IOException;
 import java.util.*;
 
 
@@ -20,10 +19,12 @@ public class ContextListener implements ServletContextListener {
         Map<String, User> users = new HashMap<>();
         ArrayList<User> pairs = new ArrayList<>();
 
+        //UserRepository userRepository = new UserRepository();
         UserService userService = new UserService();
 
         servletContext.setAttribute("users", users);
         servletContext.setAttribute("pairs", pairs);
+        //servletContext.setAttribute("userService", userRepository);
         servletContext.setAttribute("userService", userService);
     }
     public void contextDestroyed(ServletContextEvent event) {

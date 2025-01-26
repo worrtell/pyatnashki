@@ -1,9 +1,8 @@
 package com.pyatnashki.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pyatnashki.data.User;
+import com.pyatnashki.model.User;
 import com.pyatnashki.service.UserService;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
@@ -12,12 +11,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
 
 @WebServlet("/game")
 public class GameServlet extends HttpServlet {

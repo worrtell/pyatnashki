@@ -1,8 +1,5 @@
 package com.pyatnashki.gui.game;
 
-import com.pyatnashki.data.BoardDataSource;
-import com.pyatnashki.data.User;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;

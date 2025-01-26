@@ -1,26 +1,20 @@
-package com.pyatnashki.data;
+package com.pyatnashki.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pyatnashki.model.User;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-public class BoardDataSource {
+public class UserRequestHandler {
     HttpClient client;
     HttpRequest request;
 
-    public BoardDataSource() {
+    public UserRequestHandler() {
         System.out.println("new client");
         client = HttpClient.newHttpClient();
     }

@@ -1,19 +1,14 @@
 package com.pyatnashki.gui.start;
 
-import com.pyatnashki.data.BoardDataSource;
-import com.pyatnashki.data.User;
+import com.pyatnashki.model.User;
 import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 @Setter
 public class WaitFrame extends JFrame {
     JButton btn;
-    static BoardDataSource ds;
     static User user;
 
     public WaitFrame(User user) {
@@ -35,8 +30,6 @@ public class WaitFrame extends JFrame {
         JLabel lblLoading = new JLabel(loadingIcon, JLabel.CENTER);
         add(lblLoading, BorderLayout.CENTER);
 
-        ds = new BoardDataSource();
-
         System.out.println("new wait frame");
 
         btn = new JButton("test");
@@ -46,12 +39,4 @@ public class WaitFrame extends JFrame {
         setVisible(true);
         System.out.println("user " + user.toString());
     }
-
-//    public static void t() {
-//        try {
-//            ds.onMove(user);
-//        } catch (URISyntaxException | IOException | InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }
