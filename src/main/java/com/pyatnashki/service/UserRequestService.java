@@ -27,4 +27,8 @@ public class UserRequestService {
     public boolean getPairFlag(User u) {
         return requestHandler.getPairFlag(u);
     }
+
+    public int getCount(User u) {
+        return requestHandler.getCount(u);
+    }
 }

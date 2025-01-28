@@ -18,6 +18,7 @@ public class User {
     String pairSecretKey;
     int keycode;
     boolean flag;
+    int count;
 
     public User(String name) {
         this.name = name;

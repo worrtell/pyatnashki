@@ -60,6 +60,19 @@ public class UserRequestHandler {
         }
     }
 
+
+    public int getCount(User u) {
+        HttpResponse response = sendUser(u, "getCount");
+        String strResp = (String) response.body();
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            int count = mapper.readValue(strResp, Integer.class);
+            return count;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean getPairFlag(User u) {
         HttpResponse response = sendUser(u, "getPairFlag");
         String strResp = (String) response.body();

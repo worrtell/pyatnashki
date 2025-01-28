@@ -32,4 +32,8 @@ public class UserService {
     public boolean getPairFlag(User user) {
         return repository.getPairFlag(user);
     }
+
+    public int getCount(User user) {
+        return repository.getCount(user);
+    }
 }

@@ -98,9 +98,13 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
         setMovesMade();
         user.setFlag(true);
         user.setOrder(order);
-        if (order.equals(winOrder)) {
-            System.out.println("WON");
-        }
+        System.out.println(winner(order));
+    }
+
+    private boolean winner(ArrayList<String> order) {
+        ArrayList<String> order_copy = new ArrayList<>(order);
+        order_copy.remove("0");
+        return order_copy.equals(winOrder);
     }
 
     @Override
