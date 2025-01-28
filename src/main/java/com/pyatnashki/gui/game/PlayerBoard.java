@@ -1,6 +1,7 @@
 package com.pyatnashki.gui.game;
 
 
+import com.pyatnashki.gui.FinalFrame;
 import com.pyatnashki.model.User;
 import com.pyatnashki.service.UserRequestService;
 
@@ -23,6 +24,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     private User user;
     private Stopwatch stopwatch;
     private ArrayList<String> orderOfOpponent;
+    private ArrayList<String> order;
     private final ArrayList<String> winOrder = new ArrayList<>(asList("1", "2", "3", "4", "5", "6", "7", "8"));
 
     private UserRequestService requestService;
@@ -72,25 +74,25 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     }
 
     public void tryMakingMove(int keyCode) {
-        ArrayList<String> order = gameBoard.getOrder();
+        order = gameBoard.getOrder();
         if (moveKeys.contains(keyCode)) {
             if (keyCode == 37 && goLeft.contains(order.indexOf("0"))) {
                 Collections.swap(order, order.indexOf("0"), order.indexOf("0") + 1);
-                addMove(order);
+                addMove();
             } else if (keyCode == 39 && goRight.contains(order.indexOf("0"))) {
                 Collections.swap(order, order.indexOf("0"), order.indexOf("0") - 1);
-                addMove(order);
+                addMove();
             } else if (keyCode == 38 && goUp.contains(order.indexOf("0"))) {
                 Collections.swap(order, order.indexOf("0"), order.indexOf("0") + 3);
-                addMove(order);
+                addMove();
             } else if (keyCode == 40 && goDown.contains(order.indexOf("0"))) {
                 Collections.swap(order, order.indexOf("0"), order.indexOf("0") - 3);
-                addMove(order);
+                addMove();
             }
         }
     }
 
-    public void addMove(ArrayList<String> order) {
+    public void addMove() {
         user.setFlag(true);
         gameBoard.remove(gameBoard.getButtonPanel());
         gameBoard.setBoard();
@@ -98,7 +100,6 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
         setMovesMade();
         user.setFlag(true);
         user.setOrder(order);
-        System.out.println(winner(order));
     }
 
     private boolean winner(ArrayList<String> order) {
@@ -116,6 +117,11 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
         user.setKeycode(e.getKeyCode());
         tryMakingMove(e.getKeyCode());
         requestService.onMove(user);
+
+        if (winner(order)) {
+            System.out.println("key won");
+            FinalFrame finalFrame = new FinalFrame(user.getName());
+        }
     }
 
     @Override
@@ -131,6 +137,11 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
                     if (!orderOfOpponent.equals(requestService.getPairOrder(user)) || !requestService.getPairFlag(user)) { //or moves counter of opponent == 0
                         orderOfOpponent = requestService.getPairOrder(user);
                         tryMakingMove(gotKeyPressed);
+
+                        if (winner(orderOfOpponent)) {
+                            FinalFrame finalFrame = new FinalFrame(requestService.getPairName(user));
+                            System.out.println("reset won");
+                        }
                     }
                     try {
                         Thread.sleep(500); // 1 second

@@ -66,6 +66,14 @@ public class UserRepository {
         return 0;
     }
 
+    public String getName(User user) {
+        String pairSecretKey = getPairSecretKey(user);
+        if (!pairSecretKey.isEmpty()) {
+            return users.get(pairSecretKey).getName();
+        }
+        return "";
+    }
+
     private void findFree(User young) {
         users.forEach( (secretKey,u) -> {
                     if (u.getPairSecretKey().isEmpty()) {

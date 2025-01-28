@@ -36,4 +36,9 @@ public class UserService {
     public int getCount(User user) {
         return repository.getCount(user);
     }
+
+    public String getName(User user) {
+        return repository.getName(user);
+    }
+
 }

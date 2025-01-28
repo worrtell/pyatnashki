@@ -31,4 +31,8 @@ public class UserRequestService {
     public int getCount(User u) {
         return requestHandler.getCount(u);
     }
+
+    public String getPairName(User u) {
+        return requestHandler.getPairName(u);
+    }
 }

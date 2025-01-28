@@ -86,6 +86,18 @@ public class UserRequestHandler {
         }
     }
 
+    public String getPairName(User u) {
+        HttpResponse response = sendUser(u, "getPairName");
+        String strResp = (String) response.body();
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            String name = mapper.readValue(strResp, String.class);
+            return name;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static HttpRequest.BodyPublisher ofForm(User user, String type) {
         ObjectMapper mapper = new ObjectMapper();
         try {

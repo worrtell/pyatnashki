@@ -47,9 +47,10 @@ public class Board extends JFrame {
 
     private ArrayList<String> getStartPosition() {
         // and here we need to put user order
-        ArrayList<String> order = new ArrayList<>(asList("0", "1", "2", "3", "4", "5", "6", "7", "8"));
-        Collections.shuffle(order);
-        return order;
+//        ArrayList<String> order = new ArrayList<>(asList("0", "1", "2", "3", "4", "5", "6", "7", "8"));
+//        Collections.shuffle(order);
+//        return order;
+        return new ArrayList<>(asList("1", "2", "3", "4", "6", "8", "7", "5", "0"));
     }
 
    public void resetGameBoardTwo() {

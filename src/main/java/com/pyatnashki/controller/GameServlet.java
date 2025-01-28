@@ -64,6 +64,9 @@ public class GameServlet extends HttpServlet {
         else if (type.equals("getCount")) {
             mapper.writeValue(response.getWriter(), userService.getCount(u));
         }
+        else if (type.equals("getPairName")) {
+            mapper.writeValue(response.getWriter(), userService.getName(u));
+        }
     }
 
     @Override
