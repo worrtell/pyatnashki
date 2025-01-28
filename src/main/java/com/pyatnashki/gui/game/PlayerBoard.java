@@ -23,6 +23,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     private User user;
     private Stopwatch stopwatch;
     private ArrayList<String> orderOfOpponent;
+    private final ArrayList<String> winOrder = new ArrayList<>(asList("1", "2", "3", "4", "5", "6", "7", "8"));
 
     private UserRequestService requestService;
     private final ArrayList<Integer> goLeft = new ArrayList<>(asList(0, 1, 3, 4, 6, 7));
@@ -75,28 +76,31 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
         if (moveKeys.contains(keyCode)) {
             if (keyCode == 37 && goLeft.contains(order.indexOf("0"))) {
                 Collections.swap(order, order.indexOf("0"), order.indexOf("0") + 1);
-                addMove();
+                addMove(order);
             } else if (keyCode == 39 && goRight.contains(order.indexOf("0"))) {
                 Collections.swap(order, order.indexOf("0"), order.indexOf("0") - 1);
-                addMove();
+                addMove(order);
             } else if (keyCode == 38 && goUp.contains(order.indexOf("0"))) {
                 Collections.swap(order, order.indexOf("0"), order.indexOf("0") + 3);
-                addMove();
+                addMove(order);
             } else if (keyCode == 40 && goDown.contains(order.indexOf("0"))) {
                 Collections.swap(order, order.indexOf("0"), order.indexOf("0") - 3);
-                addMove();
+                addMove(order);
             }
-
         }
     }
 
-    public void addMove() {
+    public void addMove(ArrayList<String> order) {
         user.setFlag(true);
         gameBoard.remove(gameBoard.getButtonPanel());
         gameBoard.setBoard();
         movesCounter++;
         setMovesMade();
         user.setFlag(true);
+        user.setOrder(order);
+        if (order.equals(winOrder)) {
+            System.out.println("WON");
+        }
     }
 
     @Override
@@ -106,8 +110,8 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         user.setKeycode(e.getKeyCode());
-        requestService.onMove(user);
         tryMakingMove(e.getKeyCode());
+        requestService.onMove(user);
     }
 
     @Override
@@ -118,6 +122,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
         Thread thread = new Thread() {
             public void run() {
                 while (true) {
+                    System.out.println("reset");
                     int gotKeyPressed = requestService.getPairMove(user);
                     if (!orderOfOpponent.equals(requestService.getPairOrder(user)) || !requestService.getPairFlag(user)) { //or moves counter of opponent == 0
                         orderOfOpponent = requestService.getPairOrder(user);

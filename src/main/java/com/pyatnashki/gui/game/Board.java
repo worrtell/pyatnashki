@@ -56,5 +56,4 @@ public class Board extends JFrame {
        playerBoardTwo.reset();
    }
 
-
 }

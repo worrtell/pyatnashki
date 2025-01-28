@@ -35,8 +35,6 @@ public class GameServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
 
-        System.out.println("session " + req.getSession().getId());
-
         String body = getBody(req);
 
         JsonNode rootNode = mapper.readTree(body);
@@ -48,21 +46,16 @@ public class GameServlet extends HttpServlet {
         String type = mapper.writeValueAsString(typeNode).replaceAll("\"", "");
 
         User u = mapper.readValue(userJson, User.class);
-        // when just send info (user) type = write, when need pair's moves type = getPairCode
-
-        System.out.println(type);
         if (type.equals("write")) {
             System.out.println("write request");
             userService.add(u);
         }
         else if (type.equals("getPairCode")) {
-            System.out.println("getPairCode request");
-            ans = String.valueOf(userService.getPairKeyCode(u));
-            System.out.println("ans " + ans);
-            mapper.writeValue(response.getWriter(), ans);
+//            ans = String.valueOf(userService.getPairKeyCode(u));
+//            System.out.println("ans " + ans);
+            mapper.writeValue(response.getWriter(), userService.getPairKeyCode(u));
         }
         else if (type.equals("getPairOrder")) {
-            System.out.println("getPairOrder request");
             mapper.writeValue(response.getWriter(), userService.getPairOrder(u));
         }
         else if (type.equals("getPairFlag")) {

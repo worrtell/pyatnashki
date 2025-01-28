@@ -42,12 +42,22 @@ public class UserRequestHandler {
     public int getPairMove(User u) {
         HttpResponse response = sendUser(u, "getPairCode");
         String strResp = (String) response.body();
-        if (strResp.length() == 2) {
-            System.out.println("respB is empty");
-            return 0;
+
+//        if (strResp.length() == 2) {
+//            System.out.println("respB is empty");
+//            return 0;
+//        }
+//        strResp = strResp.replaceAll("\"", "");
+//        return Integer.parseInt(strResp);
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            int order = mapper.readValue(strResp, Integer.class);
+            System.out.println(order);
+            return order;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
-        strResp = strResp.replaceAll("\"", "");
-        return Integer.parseInt(strResp);
     }
 
     public boolean getPairFlag(User u) {

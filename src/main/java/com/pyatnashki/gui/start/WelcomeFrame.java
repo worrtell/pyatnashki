@@ -118,11 +118,8 @@ public class WelcomeFrame extends JFrame {
                 });
                 t1.start();
                 t2.start();
-
                 //users = new LinkedList<>();
             }
         }
     }
 }
-// enable second half
-// give names
