@@ -42,7 +42,6 @@ public class UserRequestHandler {
     public int getPairMove(User u) {
         HttpResponse response = sendUser(u, "getPairCode");
         String strResp = (String) response.body();
-
         if (strResp.length() == 2) {
             System.out.println("respB is empty");
             return 0;

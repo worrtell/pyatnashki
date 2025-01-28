@@ -104,7 +104,6 @@ public class WelcomeFrame extends JFrame {
 //                Board board2 = new Board(users.get(1));
 //                board2.resetGameBoardTwo();
 //                users = new LinkedList<>();
-
                 Thread t1 = new Thread(new Runnable() {
                     public void run() {
                         Board board1 = new Board(users.get(0));
@@ -119,6 +118,7 @@ public class WelcomeFrame extends JFrame {
                 });
                 t1.start();
                 t2.start();
+
                 //users = new LinkedList<>();
             }
         }

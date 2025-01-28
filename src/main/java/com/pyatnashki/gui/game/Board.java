@@ -19,21 +19,25 @@ public class Board extends JFrame {
     /* this is board of his opponent
     so: we need to get the start position from server
     */
+
     /* key codes:
     37, 38, 39, 40
      */
+   private UserRequestService requestService = new UserRequestService();
+    private User user;
 
-    UserRequestService requestService = new UserRequestService();
 
     public Board(User user) {
         super();
         ArrayList<String> order = getStartPosition();
         playerBoardOne = new PlayerBoard(new GameBoard(order), user, 0, 0);
-        user.setOrder(order);
+        this.user = user;
+        this.user.setOrder(order);
         requestService.onMove(user);
         playerBoardTwo = new PlayerBoard(new GameBoard(requestService.getPairOrder(user)), user, 330, 0);
         add(playerBoardOne, BorderLayout.WEST);
         add(playerBoardTwo, BorderLayout.EAST);
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(650, 600));
         setLayout(new BorderLayout());
@@ -51,5 +55,6 @@ public class Board extends JFrame {
    public void resetGameBoardTwo() {
        playerBoardTwo.reset();
    }
+
 
 }
