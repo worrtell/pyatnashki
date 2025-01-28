@@ -29,6 +29,7 @@ public class Board extends JFrame {
 
     public Board(User user) {
         super();
+
         ArrayList<String> order = getStartPosition();
         playerBoardOne = new PlayerBoard(new GameBoard(order), user, 0, 0);
         this.user = user;

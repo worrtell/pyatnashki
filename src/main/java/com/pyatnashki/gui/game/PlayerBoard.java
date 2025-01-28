@@ -25,7 +25,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
     private Stopwatch stopwatch;
     private ArrayList<String> orderOfOpponent;
     private ArrayList<String> order;
-    private final ArrayList<String> winOrder = new ArrayList<>(asList("1", "2", "3", "4", "5", "6", "7", "8"));
+    private final ArrayList<String> winOrder = new ArrayList<>(asList("1", "2", "3", "4", "5", "6", "7", "8", "0"));
 
     private UserRequestService requestService;
     private final ArrayList<Integer> goLeft = new ArrayList<>(asList(0, 1, 3, 4, 6, 7));
@@ -102,10 +102,11 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
         user.setOrder(order);
     }
 
-    private boolean winner(ArrayList<String> order) {
-        ArrayList<String> order_copy = new ArrayList<>(order);
-        order_copy.remove("0");
-        return order_copy.equals(winOrder);
+    private void checkWin(ArrayList<String> order, String name, int x, int y) {
+        if (order.equals(winOrder)) {
+            FinalFrame finalFrame = new FinalFrame(name);
+            finalFrame.setBounds(x, y, 400, 200);
+        }
     }
 
     @Override
@@ -117,11 +118,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
         user.setKeycode(e.getKeyCode());
         tryMakingMove(e.getKeyCode());
         requestService.onMove(user);
-
-        if (winner(order)) {
-            System.out.println("key won");
-            FinalFrame finalFrame = new FinalFrame(user.getName());
-        }
+        checkWin(order, user.getName(), 10,100);
     }
 
     @Override
@@ -137,11 +134,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
                     if (!orderOfOpponent.equals(requestService.getPairOrder(user)) || !requestService.getPairFlag(user)) { //or moves counter of opponent == 0
                         orderOfOpponent = requestService.getPairOrder(user);
                         tryMakingMove(gotKeyPressed);
-
-                        if (winner(orderOfOpponent)) {
-                            FinalFrame finalFrame = new FinalFrame(requestService.getPairName(user));
-                            System.out.println("reset won");
-                        }
+                        checkWin(orderOfOpponent, requestService.getPairName(user),700,100);
                     }
                     try {
                         Thread.sleep(500); // 1 second

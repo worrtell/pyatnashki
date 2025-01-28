@@ -14,7 +14,6 @@ public class FinalFrame extends JFrame {
         super("Results");
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(400, 200);
         setLocationRelativeTo(null);
 
         setLayout(new BorderLayout());
