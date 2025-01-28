@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
+import java.util.Random;
 
 import static java.util.Arrays.asList;
 
@@ -23,13 +25,12 @@ public class Board extends JFrame {
     /* key codes:
     37, 38, 39, 40
      */
-   private UserRequestService requestService = new UserRequestService();
+    private UserRequestService requestService = new UserRequestService();
     private User user;
 
 
     public Board(User user) {
         super();
-
         ArrayList<String> order = getStartPosition();
         playerBoardOne = new PlayerBoard(new GameBoard(order), user, 0, 0);
         this.user = user;
@@ -47,15 +48,43 @@ public class Board extends JFrame {
     }
 
     private ArrayList<String> getStartPosition() {
-        // and here we need to put user order
-//        ArrayList<String> order = new ArrayList<>(asList("0", "1", "2", "3", "4", "5", "6", "7", "8"));
-//        Collections.shuffle(order);
-//        return order;
-        return new ArrayList<>(asList("1", "2", "3", "4", "6", "8", "7", "5", "0"));
+        ArrayList<String> correct = new ArrayList<>(asList("1", "2", "3", "4", "5", "6", "7", "8", "0"));
+        ArrayList<String> order = new ArrayList<>(asList("0", "1", "2", "3", "4", "5", "6", "7", "8"));
+        randomize(order);
+        while (!even(order) || order.equals(correct)) {
+            randomize(order);
+        }
+        return order;
+        //   return new ArrayList<>(asList("1", "2", "3", "4", "6", "8", "7", "5", "0"));
     }
 
-   public void resetGameBoardTwo() {
-       playerBoardTwo.reset();
-   }
+    private void randomize(ArrayList<String> order) {
+        Random r = new Random();
+        for (int i = order.size() - 1; i > 0; i--) {
+            int j = r.nextInt(i);
+            String temp = order.get(i);
+            order.set(i, order.get(j));
+            order.set(j, temp);
+        }
+    }
+
+    private boolean even(ArrayList<String> order) {
+        Map<String, Integer> correct = Map.of(
+                "1", 0,
+                "2", 1,
+                "3", 2,
+                "4", 3,
+                "5", 4,
+                "6", 5,
+                "7", 6,
+                "8", 7,
+                "0", 8
+        );
+        return order.stream().mapToInt(x -> Math.abs(order.indexOf(x) - correct.get(x))).sum() % 2 == 0;
+    }
+
+    public void resetGameBoardTwo() {
+        playerBoardTwo.reset();
+    }
 
 }

@@ -131,7 +131,7 @@ public class PlayerBoard extends JLayeredPane implements KeyListener {
                 while (true) {
                     System.out.println("reset");
                     int gotKeyPressed = requestService.getPairMove(user);
-                    if (!orderOfOpponent.equals(requestService.getPairOrder(user)) || !requestService.getPairFlag(user)) { //or moves counter of opponent == 0
+                    if (!orderOfOpponent.equals(requestService.getPairOrder(user))) { //or moves counter of opponent == 0
                         orderOfOpponent = requestService.getPairOrder(user);
                         tryMakingMove(gotKeyPressed);
                         checkWin(orderOfOpponent, requestService.getPairName(user),700,100);
